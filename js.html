@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>原声js</title>
+</head>
+<body>
+	按F12看控制台输出！
+    <br />
+    <input type="text" id="txtSuggestions" />
+    <script type="text/javascript">
+
+var txt = document.getElementById("txtSuggestions");
+txt.onkeyup = function() {
+    var inputTxt = txt.value;
+    var script = document.createElement("script");
+        script.src = "http://suggestion.baidu.com/su/json/?wd="+inputTxt+"&p=3&cb=getData&t=new Date().getMilliseconds().toString()";
+        document.body.insertBefore(script,document.body.firstChild);
+    };
+function getData(data) {
+    var Info = data.s; //获取异步数据,可以先输出data即可知道我们需要数据在data.s里
+    console.log(Info);
+}
+</script>
+</body>
+</html>

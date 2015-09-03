@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery</title>
+</head>
+<body>
+    按F12看控制台输出！
+    <br />
+    <input type="text" id="txtSuggestions" />
+    <script type="text/javascript">
+    $(function () {
+        $("#txtSuggestions").keyup(function () {
+            var inputTxt = $("#txtSuggestions").val();   //获取输入的关键字
+            var qsData = { 'wd': inputTxt, 'p': '3', 'cb': 'getData', 't': new Date().getMilliseconds().toString() };
+            $.ajax({
+                async: false,
+                url: "http://suggestion.baidu.com/su",
+                type: "GET",
+                dataType: 'jsonp',
+                jsonp: 'jsoncallback',
+                data: qsData,
+                timeout: 5000,
+                success: function (json) {
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+    });
+    function getData(data) {
+        var Info = data.s; 
+        console.log(Info);
+    }
+    </script>
+</body>
+</html>
